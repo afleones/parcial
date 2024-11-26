@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/styles.css">
+        <title>Formulario de Inscripción a Carrera</title>
+    </head>
+
+    <body>
+        <form id="miFormulario">
+            <h2>Formulario de Inscripción a Carrera</h2>
+
+            <!-- Selección de Carrera -->
+            <section>
+                <p class="required-fields">
+                    <span class="icon">!</span>
+                    Los campos marcados con Asteriscos (<span class="red-asterisk">*</span>) son Obligatorios
+                </p>
+
+                <h3>Información Académica</h3>
+                <label for="carrera" class="required">
+                    ¿En qué Carrera desea inscribirse?
+                    <span class="help-icon"
+                        title="Seleccione la carrera en la que desea inscribirse. Si tiene dudas, contacte con soporte.">&#x1F6C8;</span>
+                </label>
+                <select id="carrera" name="carrera" required>
+                    <option value="">Seleccione una carrera</option>
+                </select>
+            </section>
+
+            <!-- Información Personal -->
+            <section>
+                <h3>Información Personal</h3>
+                <label for="primer_nombre" class="required">Primer Nombre
+                    <span class="help-icon" title="Digite su primer nombre (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <input type="text" id="primer_nombre" name="primer_nombre" placeholder="Ej: Juan" required
+                    pattern="^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras.">
+
+                <label for="segundo_nombre">Segundo Nombre
+                    <span class="help-icon" title="Digite su segundo nombre (Opcional).">&#x1F6C8;</span>
+                </label>
+                <input type="text" id="segundo_nombre" name="segundo_nombre" placeholder="Ej: Felipe"
+                    pattern="^[A-Za-záéíóúÁÉÍÓÚñÑ\s]*$" title="Solo se permiten letras.">
+
+                <label for="primer_apellido" class="required">Primer Apellido
+                    <span class="help-icon" title="Digite su primer Apellido (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <input type="text" id="primer_apellido" name="primer_apellido" placeholder="Ej: Perez" required
+                    pattern="^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras.">
+
+                <label for="segundo_apellido" class="required">Segundo Apellido
+                    <span class="help-icon" title="Digite su segundo Apellido (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <input type="text" id="segundo_apellido" name="segundo_apellido" placeholder="Ej: García" required
+                    pattern="^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras.">
+
+                <label for="fecha_nacimiento" class="required">Fecha de Nacimiento
+                    <span class="help-icon"
+                        title="Seleccione su fecha de nacimiento, al hacer clic en el calendario podrá escoger la fecha (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+
+                <label for="sexo_biologico" class="required">Sexo Biológico
+                    <span class="help-icon" title="Seleccione su sexo Biologico (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <select id="sexo_biologico" name="sexo_biologico" required>
+                    <option value="">Seleccione una opción</option>
+                </select>
+
+                <label for="estado_civil" class="required">Estado Civil
+                    <span class="help-icon" title="Seleccione su estado civil (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <select id="estado_civil" name="estado_civil" required>
+                    <option value="">Seleccione una opción</option>
+                </select>
+
+                <label for="email" class="required">Correo Electrónico
+                    <span class="help-icon" title="Escriba su correo electrónico (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+                <label for="telefono">Teléfono
+                    <span class="help-icon" title="Escriba su numero de telefono Fijo (Si aplica).">&#x1F6C8;</span>
+                </label>
+                <input type="tel" id="telefono" name="telefono" placeholder="600-000000">
+
+                <label for="celular" class="required">Celular
+                    <span class="help-icon" title="Escriba su numero de celular (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <input type="tel" id="celular" name="celular" placeholder="300-000000" required pattern="^[0-9]{10,}$"
+                    title="Este campo no admite letras y debe tener al menos 10 números.">
+            </section>
+
+            <section>
+                <h3>Dirección Residencial</h3>
+                <label for="Pais" class="required">País
+                    <span class="help-icon" title="Seleccione su país de origen (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <select id="Pais" name="Pais" required>
+                    <option value="">Seleccione un país</option>
+                </select>
+            
+                <label for="ciudad" class="required">Ciudad
+                    <span class="help-icon" title="Seleccione su ciudad de origen (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <select id="ciudad" name="ciudad" required disabled>
+                    <option value="">Seleccione una ciudad</option>
+                </select>
+            
+                <label for="direccion" class="required">Dirección
+                    <span class="help-icon" title="Digite la dirección de su residencia (Obligatorio).">&#x1F6C8;</span>
+                </label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ej: Cra 54 # 12c - 21" required disabled>
+            </section>
+                        
+
+            <!-- Encuesta Personal -->
+            <section>
+                <h3>Encuesta Personal</h3>
+
+                <!-- Pregunta: ¿Tiene usted hijos? -->
+                <label class="required">¿Tiene usted hijos?</label>
+                <div class="options-group">
+                    <label><input type="radio" name="hijos" value="No tengo" required>No tengo</label>
+                    <label><input type="radio" name="hijos" value="1 hijo">1 hijo</label>
+                    <label><input type="radio" name="hijos" value="2 hijos">2 hijos</label>
+                    <label><input type="radio" name="hijos" value="3 hijos">3 hijos</label>
+                    <label><input type="radio" name="hijos" value="Más de 4 hijos">Más de 4 hijos</label>
+                </div>
+                <hr> <!-- Separador -->
+
+                <!-- Pregunta: ¿Se reconoce como parte de las siguientes poblaciones? -->
+                <label class="required">¿Se reconoce como parte de las siguientes poblaciones?</label>
+                <div class="options-group">
+                    <label><input type="radio" name="Poblacion" value="Ninguna" required> Ninguna</label>
+                    <label><input type="radio" name="Poblacion" value="Indígena" required> Indígena</label>
+                    <label><input type="radio" name="Poblacion" value="Afrocolombianos" required> Afrocolombianos</label>
+                    <label><input type="radio" name="Poblacion" value="Raízales" required> Raízales</label>
+                    <label><input type="radio" name="Poblacion" value="Pueblo ROM o Gitano" required> Pueblo ROM o
+                        Gitano</label>
+                </div>
+                <hr> <!-- Separador -->
+
+                <!-- Pregunta: ¿Cuenta con alguna Discapacidad? -->
+                <section>
+                    <label class="required">¿Cuenta con alguna Discapacidad?</label>
+                    <div class="options-group">
+                        <label><input type="radio" name="Discapacidad" value="Ninguna" required> Ninguna</label>
+                        <label><input type="radio" name="Discapacidad" value="Discapacidad Motriz" required> Discapacidad
+                            Motriz</label>
+                        <label><input type="radio" name="Discapacidad" value="Discapacidad Sorda" required> Discapacidad
+                            Sorda</label>
+                        <label><input type="radio" name="Discapacidad" value="Discapacidad Cognitiva" required> Discapacidad
+                            Cognitiva</label>
+                        <label><input type="radio" name="Discapacidad" value="SordoCeguera" required> SordoCeguera</label>
+                        <label><input type="radio" name="Discapacidad" value="Trastorno de la Voz y el Habla" required>
+                            Trastorno de la Voz y el Habla</label>
+                        <label><input type="radio" name="Discapacidad" value="Otra" required> Otra (Seleccione esta opción
+                            para mostrar la siguiente sección)</label>
+                    </div>
+
+                    <!-- Contenedor para "Otra" discapacidad -->
+                    <div id="otraDiscapacidad" style="display: none; margin-top: 15px;">
+                        <label for="otraDiscapacidadInput">Diga cuál es su otra discapacidad: *</label>
+                        <input type="text" id="otraDiscapacidadInput" name="otraDiscapacidad"
+                            placeholder="Especifique su discapacidad" />
+                    </div>
+                </section>
+                <hr> <!-- Separador -->
+
+                <!-- Pregunta: ¿Usted Trabaja actualmente? -->
+                <label class="required">¿Usted Trabaja actualmente?</label>
+                <div class="options-group">
+                    <label><input type="radio" name="Trabajo" value="No estoy trabajando" required> No estoy trabajando</label>
+                    <label><input type="radio" name="Trabajo" value="Empleado" required> Sí, Empleado</label>
+                    <label><input type="radio" name="Trabajo" value="Independiente" required> Sí, Independiente</label>
+                </div>
+                <hr> <!-- Separador -->
+
+            </section>
+
+            <div class="button-container">
+                <button id="submit" type="submit">Enviar</button>
+            </div>
+        </form>
+    </body>
+    <script src="js/validaciones.js"></script>
+    <script src="js/carreras.js"></script>
+    <script src="js/sexo.js"></script>
+    <script src="js/estadoCivil.js"></script>
+    <script src="js/otraDiscapacidad.js"></script>
+    <script src="js/guardarForm.js"></script>
+    <script src="js/alertas/aviso.js"></script>
+    <script src="js/alertas/formEnviado.js"></script>
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>
