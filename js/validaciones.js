@@ -59,97 +59,64 @@ ciudadSelect.addEventListener("change", function () {
 });
 
 function guardarForm(event) {
-    event.preventDefault();  // Previene el envío del formulario
+    event.preventDefault(); // Previene el envío del formulario
 
-    // Validación adicional para el select 'carrera'
-    if (!carreraSelect.value) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Falta completar',
-            text: 'Debes seleccionar una carrera.',
-        }).then(() => {
-            setTimeout(() => {
-                carreraSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                carreraSelect.focus(); // Focaliza el campo
-            }, 500); // Retraso de medio segundo
-        });
-        return; // Detiene el proceso si no se ha seleccionado un valor
-    }
+    // Listas de valores válidos
+    const sexosValidos = ["Masculino", "Femenino"];
+    const estadosCivilesValidos = ["Soltero", "Casado", "Divorciado", "Viudo", "Unión libre"];
 
-    // Validar campos de texto obligatorios en el mismo orden
-    const camposObligatorios = [
-        'primer_nombre',
-        'primer_apellido',
-        'fecha_nacimiento',
-        'sexo_biologico',
-        'estado_civil',
-        'email',
-        'telefono',
-        'celular'
+    // Validar campos obligatorios y su tipo
+    const campos = [
+        { id: 'carrera', regex: /.+/, errorVacio: 'Debes seleccionar una carrera.', errorFormato: '' },
+        { id: 'primer_nombre', regex: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, errorVacio: 'El primer nombre es obligatorio.', errorFormato: 'El nombre solo debe contener letras.' },
+        { id: 'primer_apellido', regex: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, errorVacio: 'El primer apellido es obligatorio.', errorFormato: 'El apellido solo debe contener letras.' },
+        { id: 'segundo_apellido', regex: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, errorVacio: 'El segundo apellido es obligatorio.', errorFormato: 'El apellido solo debe contener letras.' },
+        { id: 'tipo_documento', errorVacio: 'El tipo de documento es obligatorio.' },        
+        { id: 'numero_documento', regex: /^[0-9]+$/, errorVacio: 'El número de documento es obligatorio.', errorFormato: 'El número de documento debe contener solo números.' },
+        { id: 'fecha_nacimiento', regex: /^\d{4}-\d{2}-\d{2}$/, errorVacio: 'La fecha de nacimiento es obligatoria.', errorFormato: 'La fecha de nacimiento debe estar en el formato YYYY-MM-DD.' },
+        { id: 'sexo_biologico', regex: /.+/, errorVacio: 'Debes seleccionar el sexo.', errorFormato: '' },
+        { id: 'estado_civil', regex: /.+/, errorVacio: 'Debes seleccionar el estado civil.', errorFormato: '' },
+        { id: 'email', regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, errorVacio: 'El correo es obligatorio.', errorFormato: 'El correo debe tener un formato válido. EJ: example@email.com' },
+        { id: 'celular', regex: /^[0-9]+$/, errorVacio: 'El celular es obligatorio.', errorFormato: 'El celular debe contener solo números.' },
+        { id: 'Pais', errorVacio: 'Debes seleccionar un país.' },
+        { id: 'ciudad', errorVacio: 'Debes seleccionar una ciudad.' },
+        { id: 'direccion', errorVacio: 'La dirección es obligatoria.' }
     ];
 
-    // Recorremos los campos obligatorios
-    for (let campoId of camposObligatorios) {
-        const campo = document.getElementById(campoId);
-        if (!campo.value.trim()) {
+    for (let campo of campos) {
+        const input = document.getElementById(campo.id);
+        const valor = input ? input.value.trim() : ''; // Validar inputs y selects
+
+        if (!valor) {
             Swal.fire({
                 icon: 'error',
                 title: 'Falta completar',
-                text: `El campo ${campoId.replace('_', ' ')} es obligatorio.`,
+                text: campo.errorVacio,
             }).then(() => {
                 setTimeout(() => {
-                    campo.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-                    campo.focus(); // Focaliza el campo
-                }, 500); // Retraso de medio segundo
+                    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    input.focus();
+                }, 500);
+            });
+            return;
+        }
+
+        if (campo.regex && !campo.regex.test(valor)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Formato incorrecto',
+                text: campo.errorFormato,
+            }).then(() => {
+                setTimeout(() => {
+                    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    input.focus();
+                }, 500);
             });
             return;
         }
     }
 
-    // Validaciones adicionales para los campos obligatorios
-    if (!paisSelect.value) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Falta completar',
-            text: 'Debes seleccionar un país.',
-        }).then(() => {
-            setTimeout(() => {
-                paisSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                paisSelect.focus(); // Focaliza el campo
-            }, 500); // Retraso de medio segundo
-        });
-        return;
-    }
-
-    if (!ciudadSelect.value && paisSelect.value !== "") {
-        Swal.fire({
-            icon: 'error',
-            title: 'Falta completar',
-            text: 'Debes seleccionar una ciudad.',
-        }).then(() => {
-            setTimeout(() => {
-                ciudadSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                ciudadSelect.focus(); // Focaliza el campo
-            }, 500); // Retraso de medio segundo
-        });
-        return;
-    }
-
-    if (!direccionInput.value.trim() && ciudadSelect.value) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Falta completar',
-            text: 'Debes especificar la dirección.',
-        }).then(() => {
-            setTimeout(() => {
-                direccionInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                direccionInput.focus(); // Focaliza el campo
-            }, 500); // Retraso de medio segundo
-        });
-        return;
-    }
-
-    // Validar cada grupo de opciones
+    // Validar grupos de opciones
     const grupos = ["hijos", "Poblacion", "Discapacidad", "Trabajo"];
     for (let grupo of grupos) {
         const seleccion = document.querySelector(`input[name="${grupo}"]:checked`);
@@ -161,7 +128,7 @@ function guardarForm(event) {
             }).then(() => {
                 setTimeout(() => {
                     document.querySelector(`input[name="${grupo}"]`).scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 500); // Retraso de medio segundo
+                }, 500);
             });
             return;
         }
@@ -179,37 +146,37 @@ function guardarForm(event) {
             }).then(() => {
                 setTimeout(() => {
                     inputOtra.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    inputOtra.focus(); // Focaliza el campo
-                }, 500); // Retraso de medio segundo
+                    inputOtra.focus();
+                }, 500);
             });
             return;
         }
     }
 
-    // Obtener los datos del formulario
+    // Guardar datos y generar archivo JSON
     const datos = {
         carrera: document.getElementById('carrera').value,
         primer_nombre: document.getElementById('primer_nombre').value,
-        segundo_nombre: document.getElementById('segundo_nombre').value || '',
+        segundo_nombre: document.getElementById('primer_nombre').value ?? '',
         primer_apellido: document.getElementById('primer_apellido').value,
-        segundo_apellido: document.getElementById('segundo_apellido').value || '',
-        fecha_nacimiento: document.getElementById('fecha_nacimiento').value,
+        segundo_apellido: document.getElementById('segundo_apellido').value,
+        tipo_documento: document.getElementById('tipo_documento').value,
+        numero_documento: document.getElementById('numero_documento').value,
+        email: document.getElementById('email').value,
+        telefono: document.getElementById('telefono').value ?? '0000000',
+        celular: document.getElementById('celular').value,
         sexo_biologico: document.getElementById('sexo_biologico').value,
         estado_civil: document.getElementById('estado_civil').value,
-        email: document.getElementById('email').value,
-        telefono: document.getElementById('telefono').value || '000-0000',
-        celular: document.getElementById('celular').value,
         Pais: document.getElementById('Pais').value,
         ciudad: document.getElementById('ciudad').value,
-        direccion: document.getElementById('direccion').value || 'No Especificada',
+        direccion: document.getElementById('direccion').value,
         hijos: document.querySelector('input[name="hijos"]:checked').value,
         poblacion: document.querySelector('input[name="Poblacion"]:checked').value,
         discapacidad: document.querySelector('input[name="Discapacidad"]:checked').value,
         otraDiscapacidad: document.getElementById("otraDiscapacidadInput")?.value || '',
-        Trabajo: document.querySelector('input[name="Trabajo"]:checked').value
+        trabajo: document.querySelector('input[name="Trabajo"]:checked').value
     };
 
-    // Guardar los datos como JSON
     const datosJson = JSON.stringify(datos);
     const blob = new Blob([datosJson], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -219,7 +186,6 @@ function guardarForm(event) {
     enlace.click();
     URL.revokeObjectURL(url);
 
-    // Mostrar alerta y redirigir
     Swal.fire({
         title: '¡Formulario Guardado!',
         text: 'El archivo se ha guardado correctamente. Redirigiendo...',

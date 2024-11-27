@@ -57,6 +57,18 @@
                 <input type="text" id="segundo_apellido" name="segundo_apellido" placeholder="Ej: García" required
                     pattern="^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras.">
 
+                    <label for="tipo_documento" class="required">Tipo de Documento
+                        <span class="help-icon" title="Seleccione su tipo de documento (Obligatorio).">&#x1F6C8;</span>
+                    </label>
+                    <select id="tipo_documento" name="tipo_documento" required>
+                        <option value="">Seleccione un tipo de documento</option>
+                    </select>
+
+                    <label for="numero_documento" class="required">Numero de Documento
+                        <span class="help-icon" title="Digite su Número de Documento (Obligatorio).">&#x1F6C8;</span>
+                    </label>
+                    <input type="text" id="numero_documento" name="numero_documento" placeholder="Ej: 1234567890" required>
+    
                 <label for="fecha_nacimiento" class="required">Fecha de Nacimiento
                     <span class="help-icon"
                         title="Seleccione su fecha de nacimiento, al hacer clic en el calendario podrá escoger la fecha (Obligatorio).">&#x1F6C8;</span>
@@ -188,9 +200,7 @@
         </form>
     </body>
     <script src="js/validaciones.js"></script>
-    <script src="js/carreras.js"></script>
-    <script src="js/sexo.js"></script>
-    <script src="js/estadoCivil.js"></script>
+    <script src="js/llenarSelects.js"></script>
     <script src="js/otraDiscapacidad.js"></script>
     <script src="js/guardarForm.js"></script>
     <script src="js/alertas/aviso.js"></script>
